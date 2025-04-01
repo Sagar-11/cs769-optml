@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{Knowledge Distillation}{3}{0}{1}
+\beamer@sectionintoc {2}{Early Exit LLMs}{4}{0}{2}
