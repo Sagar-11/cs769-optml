@@ -1,39 +1,42 @@
 \documentclass{article}
-\usepackage{amsmath, tikz, pdfpages, float}
+\usepackage{amsmath, tikz, pdfpages, float, booktabs}
 \begin{document}
 \title{Synopsis of Papers read}
 \author{Edward, Sagar, Kapil}
 \maketitle
 
-\cite{MJaz+24} Talks about prediction sets in Early exit network that are consistent in some sense.
-\cite{GH+15} Having acces to a large model that generalises well, the genrelisation can be 
-induced to a smaller model by distillation. Here in combination with the cross entropy loss we also minimise the 
-kl divergence of last layer logits with the teacher model
-The intuition being that even the negative examples give info about dataset that is not captured by the cross entropy loss.
-To read: HMM, mariginalisation, Large scale distributed deep networks, mixture of experts.
-\cite{Tiw+24} While training smaller models using KD. They reweigh each instance with the loss from ce and confidence margin 
-cm from an early readout, the observation is that spurious correlations were learnt in the earlier layers leading to high 
-cm. The evaluation was performed by worst group average error. 
+\begin{itemize}
+    \item
+          \cite{tiwari_using_2024}
+          Smaller Models trained via KD rely more on spurious correlations than the teacher model. this leads to loss in
+          worst group performance / group fairness metrics. The dedier to solve this. the claim is that this correlation
+          are learnt in the early layers of the student network and a readouts from these help. the readouts from early layers
+          are more confident for the problematic instances and hence weighing the kd loss uisng them would be helpful based on the confidence
+          margin.
+          \[ \mathcal{L}_{student} =
+          \sum_{D_w}^{} (1- \lambda) \cdot l_{ce}  \\
+          + \lambda \cdot \textbf{wt} \cdot l_{ke} \] 
+          where \(\bf{wt} = \exp^{\beta.\bf{cm}.\alpha} \)  
+          Evaluations done on 4 debiasing benchmarks: CelebsA: Blond/Non Blond, Waterbirds: Landbird / Waterbird, MultiNLI: Entails/neutral/contradict,
+          CivilComments-WILDS: toxic/ or not. Baselines used- Train twice: reweighing the losses from first classifier, Group DRO, Reused teacher heads.
+
+          Model architecture used RESNETS t-50,student-18, bert-T, distillbert student. 
+    \item
+          \cite{jazbec_early-exit_2024} Talks about prediction sets in Early exit network that are consistent in some sense.
+    \item
+          \cite{hinton_distilling_2015} Having acces to a large model that generalises well, the genrelisation can be
+          induced to a smaller model by distillation. Here in combination with the cross entropy loss we also minimise the
+          kl divergence of last layer logits with the teacher model
+          The intuition being that even the negative examples give info about dataset that is not captured by the cross entropy loss.
+          To read: HMM, mariginalisation, Large scale distributed deep networks, mixture of experts.
+\end{itemize}
 
 
 
-\begin{thebibliography}{99}
-    \bibitem{MJaz+24} 
-    M. Jazbec, P. Forré, S. Mandt, D. Zhang, and E. Nalisnick, 
-    ‘Early-Exit Neural Networks with Nested Prediction Sets’, Jun. 02, 2024, 
-    arXiv: arXiv:2311.05931. Accessed: Mar. 05, 2025. [Online]. Available: http://arxiv.org/abs/2311.05931
-    \bibitem{GH+15}
-    G. Hinton, O. Vinyals, and J. Dean, ‘Distilling the Knowledge in a Neural Network’, 
-    Mar. 09, 2015, arXiv: arXiv:1503.02531. Accessed: Mar. 06, 2025. 
-    [Online]. Available: http://arxiv.org/abs/1503.02531
-    \bibitem{Tiw+24}
-    R. Tiwari, D. Sivasubramanian, A. Mekala, G. Ramakrishnan, and P. Shenoy, 
-    ‘Using Early Readouts to Mediate Featural Bias in Distillation’, 
-    in 2024 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV),
-    Waikoloa, HI, USA: IEEE, Jan. 2024, pp. 2626–2635. doi: 10.1109/WACV57701.2024.00262.
+ 
 
+\bibliographystyle{acm}
+\bibliography{optML.bib}
 
-
-\end{thebibliography}
 
 \end{document}
