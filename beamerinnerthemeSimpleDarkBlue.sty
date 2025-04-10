@@ -17,7 +17,14 @@ color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(4pt)=(lower.bg)}
 \setbeamersize{text margin left=2em,text margin right=2em}
 
 \setbeamertemplate{footline}[frame number]
-\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{navigation symbols}{
+% \insertslidenavigationsymbol%
+% \insertframenavigationsymbol%
+% \insertsubsectionnavigationsymbol%
+\insertsectionnavigationsymbol%
+\insertdocnavigationsymbol%
+}
 
 \setbeamertemplate{blocks}[rounded][shadow=true]
 
@@ -34,6 +41,7 @@ color(0pt)=(lower.bg); color(2pt)=(lower.bg); color(4pt)=(lower.bg)}
     \rlap{\hskip-2em\inserttocsectionnumber.\inserttocsubsectionnumber}
     \inserttocsubsection\par
 }
+\AtBeginSection[]{\frame{\frametitle{Section Overview}\tableofcontents[currentsection]}} % overview at each section
 
 % title page customization
 \setbeamertemplate{title page}{%
