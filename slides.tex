@@ -85,7 +85,7 @@
 \section{KD with early exits}
 \begin{frame}{KD with early exits}
     \begin{columns}
-        \begin{column}{0.4\textwidth}
+        \begin{column}{0.3\textwidth}
             \begin{itemize}
                 \item<1-> Proposed by \cite{tiwari_using_2024} % 
                 \item<2-> Student model relies on spurious correlations
@@ -95,7 +95,7 @@
             \end{itemize}
         \end{column}
 
-        \begin{column}{0.6\textwidth}
+        \begin{column}{0.7\textwidth}
             \only<2>{Smaller Models trained via KD rely more on spurious correlations than the teacher model, which 
             leads to Poor performance on group fairness metrics by the student \\
             \includegraphics[width=\textwidth]{figs/fig_4.png}}
@@ -104,7 +104,7 @@
                 \[ \mathcal{L}_{student} =
           \sum_{D_w}^{} (1- \lambda) \cdot l_{ce} 
           + \lambda \cdot \textbf{wt} \cdot l_{ke} \] 
-          where \(\bf{wt} = \exp^{\beta.\bf{cm}.\alpha} \) }
+          where \(\bf{wt} = \exp^{\beta.\bf{cm}.\alpha} \) and \(\bf{cm(p)} = p_{max} - \max_{p_k \in \bf{p} - p_{max}} p_k \) }
             \only<5>{\includegraphics[width=\textwidth]{figs/fig_6.png}}
             \only<6>{Compared to some other methods \\
                 \includegraphics[width=0.6\textwidth]{figs/fig_7.png} \\ 
@@ -122,7 +122,8 @@
     \begin{columns}
         \begin{column}{0.4\textwidth}
             \begin{itemize}
-                \item<1-> \cite{jazbec_early-exit_2024} \textbf{A}nytime\textbf{V}alid\textbf{C}onfidence\textbf{S}equences(AVCS) % 
+                \item<1-> \cite{jazbec_early-exit_2024} \\
+                 \textbf{A}nytime\textbf{V}alid\textbf{C}onfidence\textbf{S}equences(AVCS) % 
                 \item<2-> AVCS has time uniform and non - asymptotic guarantees
                 \item<3-> Martingales And Ville's theorem
                 \item<4-> Predictive-likelihood ratio
