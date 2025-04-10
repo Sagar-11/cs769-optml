@@ -22,7 +22,13 @@
 
           Model architecture used RESNETS t-50,student-18, bert-T, distillbert student. 
     \item
-          \cite{jazbec_early-exit_2024} Talks about prediction sets in Early exit network that are consistent in some sense.
+          \cite{jazbec_early-exit_2024} Talks about prediction sets in Early exit network that are nested and we can have anytime guarantee on them.
+          Villes Theorem gives us a way to give these confidence intervals if we have access to some martingales. 
+          Ideal Scenario: We compute the Posterior for the given test point,label(caveat thats the one we are making predictions for)
+          Proposition 1: This predictive likelihood ratio is martingale. Realisable relaxation: Instead of taking \(W_t|D_* \)  from posterior of dataset 
+          after adding a new point, we take it to be same as prior i.e \(W_t|D \)  The miscoverage probabibliity can be bounded by some exponential term with KL of distribution, and new instance
+          
+          For regression: 
     \item
           \cite{hinton_distilling_2015} Having acces to a large model that generalises well, the genrelisation can be
           induced to a smaller model by distillation. Here in combination with the cross entropy loss we also minimise the
