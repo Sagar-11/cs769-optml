@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Knowledge Distillation}{3}{0}{1}
+\beamer@sectionintoc {2}{KD with early exits}{8}{0}{2}
+\beamer@sectionintoc {3}{Fixing overconfidence in Dynamic Neural Networks}{16}{0}{3}
+\beamer@sectionintoc {4}{Early-Exit with Nested Prediction Sets}{25}{0}{4}

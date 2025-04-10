@@ -26,7 +26,7 @@
     CS 769 \\
     Optimization in Machine Learning % Your institution for the title page
 }
-\date{20 March 2016} % Date, can be changed to a custom date
+\date{10 April 2025} % Date, can be changed to a custom date
 
 %----------------------------------------------------------------------------------------
 %    PRESENTATION SLIDES
@@ -43,7 +43,6 @@
     % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
     \tableofcontents
 \end{frame}
-
 
 \section{Knowledge Distillation}
 
@@ -82,6 +81,8 @@
 %     \node at (0,0){Text Test};
 % \end{tikzpicture}
 
+
+
 \section{KD with early exits}
 \begin{frame}{KD with early exits}
     \begin{columns}
@@ -98,7 +99,7 @@
         \begin{column}{0.7\textwidth}
             \only<2>{Smaller Models trained via KD rely more on spurious correlations than the teacher model, which 
             leads to Poor performance on group fairness metrics by the student \\
-            \includegraphics[width=\textwidth]{figs/fig_4.png}}
+            \includegraphics[width=0.85\textwidth]{figs/fig_4.png}}
             \only<3>{\includegraphics[width=\textwidth]{figs/fig_5.png}}
             \only<4>{
                 \[ \mathcal{L}_{student} =
@@ -115,97 +116,15 @@
     
 \end{frame}
 
-\section{Early-Exit with Nested Prediction Sets}
-
-\begin{frame}{Early-Exit with Nested Prediction Sets}
-
-    \begin{columns}
-        \begin{column}{0.4\textwidth}
-            \begin{itemize}
-                \item<1-> \cite{jazbec_early-exit_2024} \\
-                 \textbf{A}nytime\textbf{V}alid\textbf{C}onfidence\textbf{S}equences(AVCS) % 
-                \item<2-> AVCS has time uniform and non - asymptotic guarantees
-                \item<3-> Martingales And Ville's theorem
-                \item<4-> Predictive-likelihood ratio
-                \item<5-> AVCS for Regression
-                \item<6-> AVCS for Classification
-                \item<7-> Post-Hoc Implementation
-            \end{itemize}
-        \end{column}
-
-        \begin{column}{0.6\textwidth}
-            \only<1>{\cite{jazbec_early-exit_2024} propose using \textbf{A}nytime\textbf{V}alid\textbf{C}onfidence
-            \textbf{S}equences(AVCS) for uncertainity estimation in Early Exit Networks}
-            \only<2>{ \[\mathcal{C}_t = (l_t, r_t) \subseteq \mathbb{R} \]
-             \[\mathcal{L}(W_{1:T}, U_{1:T}; \mathcal{D}) = \sum_{n=1}^{N} \frac{1}{T} \sum_{t=1}^{T} \ell(y_n, f(x_n; W_t, U_{1:t}))
-            \]
-            \[\text{size}(t) := \frac{1}{n_{\text{test}}} \sum_{n=1}^{n_{\text{test}}} |\mathcal{C}_t(x_n)|
-    \]
-           \[\text{coverage}(t) := \frac{1}{n_{\text{test}}} \sum_{n=1}^{n_{\text{test}}} \left[ y_n \in \mathcal{C}_t(x_n) \right]
-    \]
-    \[\mathcal{N}(t) = |\bigcap_{s \leq t} \mathcal{C}_s| / |\mathcal{C}_t| \]
-            \[\mathbb{P}(\forall t,\, \theta^* \in \mathcal{C}_t) \geq 1 - \alpha
-    \] 
-    } %  Interval notation, 
-            
-            \only<3>{\[\mathbb{E}_{x_{t+1}} \left[ R_{t+1}(\theta^*) \,\middle|\, x_1, \ldots, x_t \right] = R_t(\theta^*)
-            \]
-            \begin{displaymath}
-                \mathbb{P}(\exists t : R_t(\theta^*) \geq 1/\alpha) \leq \alpha
-            \end{displaymath}
-
-            \[\mathcal{C}_t := \{\theta : R_t(\theta) \leq 1/\alpha \} \] } % Confidence set definition
-            
-            \only<4>{Idea is to create a sequence of martingales for each exit layer and then
-    use Ville's theorem to construct AVCS. \\
-    \[ R_t^*(y) = \prod_{l=1}^{t} \frac{p_l(y| x^*, \mathcal{D})}
-        {p(y| x^*, W_l)} , W_l \sim p(W_l | D^* )\]}
-            
-            \only<5>{\begin{gather*} % posterior and predictive dsitribution
-                y \sim \mathcal{N}\left(y; h_t(x)^T W_t, \sigma_t^2\right), \\
-                W_t \sim \mathcal{N}(W_t; \hat{W}_t, \sigma_{w,t}^2 \mathbb{I}_H) \\
-                p(W_t | \mathcal{D}) = \mathcal{N}(W_t; \mu_t, \Sigma_t), \quad \\ 
-                p_t(y | x^*, \mathcal{D}) = \mathcal{N}(y; h_t(x^*)^T \mu_t, v_* + \sigma_t^2)
-            \end{gather*} 
-            }
-            
-            \only<6>{\begin{gather*} % posterior and predictive dsitribution classification
-                p(y | \pi_t) = \text{Cat}(y | \pi_t), \\
-                p(\pi_t | x^*, \mathcal{D}) = \text{Dir}(\pi_t | \alpha_t(x^*; \mathcal{D})) \\ 
-                p_t(y = y | x^*, \mathcal{D}) = \int p(y = y | \pi_t) \, p(\pi_t | x^*, \mathcal{D}) \, d\pi_t  \\
-                = \frac{\alpha_{t,y}}{\sum_{y' \in \mathcal{Y}} \alpha_{t,y'}}
-            \end{gather*} 
-            }
-
-            \only<7>{\[ a_t(x) = \text{ReLU}(x, \tau_t) \]}
-        \end{column}
-    \end{columns}
+\begin{frame} {KD with Early Exists}
+    \includegraphics[width=0.4\textwidth]{figs/fig_9.png}
 \end{frame}
 
-
-\begin{frame}{Evaluations}
-    \begin{columns} % T aliign top
-        \column{0.5\textwidth}
-        \begin{gather*}
-            \mathcal{C}_t = (l_t, r_t) \subseteq \mathbb{R} \\
-            \mathcal{L}(W_{1:T}, U_{1:T}; \mathcal{D}) =  \\
-            \sum_{n=1}^{N} \frac{1}{T} \sum_{t=1}^{T} \ell(y_n, f(x_n; W_t, U_{1:t})) \\
-            \text{size}(t) := \frac{1}{n_{\text{test}}} \sum_{n=1}^{n_{\text{test}}} |\mathcal{C}_t(x_n)| \\ 
-            \text{coverage}(t) := \frac{1}{n_{\text{test}}} \sum_{n=1}^{n_{\text{test}}} \left[ y_n \in \mathcal{C}_t(x_n) \right] \\
-            \mathcal{N}(t) = |\bigcap_{s \leq t} \mathcal{C}_s| / |\mathcal{C}_t| \\
-            \mathbb{P}(\forall t,\, \theta^* \in \mathcal{C}_t) \geq 1 - \alpha 
-        \end{gather*}
-        
-        \column{0.5\textwidth}
-        \includegraphics<1>[width=0.6\textwidth]{figs/fig_2.png}
-        \includegraphics<2>[width=\textwidth]{figs/fig_1.png}
-        \includegraphics<3>[width=\textwidth]{figs/fig_3.png}
-        
-    \end{columns}
-\end{frame}
 
 
 \section{Fixing overconfidence in Dynamic Neural Networks}
+
+
 \begin{frame}{Fixing overconfidence in Dynamic Neural Networks}
     % \textit{IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) 2024
     % }
@@ -354,6 +273,98 @@
 
 \end{frame}
 
+
+
+
+\section{Early-Exit with Nested Prediction Sets}
+
+\begin{frame}{Early-Exit with Nested Prediction Sets}
+
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            \begin{itemize}
+                \item<1-> \cite{jazbec_early-exit_2024} \\
+                 \textbf{A}nytime\textbf{V}alid\textbf{C}onfidence\textbf{S}equences(AVCS) % 
+                \item<2-> AVCS has time uniform and non - asymptotic guarantees
+                \item<3-> Martingales And Ville's theorem
+                \item<4-> Predictive-likelihood ratio
+                \item<5-> AVCS for Regression
+                \item<6-> AVCS for Classification
+                \item<7-> Post-Hoc Implementation
+            \end{itemize}
+        \end{column}
+
+        \begin{column}{0.6\textwidth}
+            \only<1>{\cite{jazbec_early-exit_2024} propose using \textbf{A}nytime\textbf{V}alid\textbf{C}onfidence
+            \textbf{S}equences(AVCS) for uncertainity estimation in Early Exit Networks}
+            \only<2>{ \[\mathcal{C}_t = (l_t, r_t) \subseteq \mathbb{R} \]
+             \[\mathcal{L}(W_{1:T}, U_{1:T}; \mathcal{D}) = \sum_{n=1}^{N} \frac{1}{T} \sum_{t=1}^{T} \ell(y_n, f(x_n; W_t, U_{1:t}))
+            \]
+            \[\text{size}(t) := \frac{1}{n_{\text{test}}} \sum_{n=1}^{n_{\text{test}}} |\mathcal{C}_t(x_n)|
+    \]
+           \[\text{coverage}(t) := \frac{1}{n_{\text{test}}} \sum_{n=1}^{n_{\text{test}}} \left[ y_n \in \mathcal{C}_t(x_n) \right]
+    \]
+    \[\mathcal{N}(t) = |\bigcap_{s \leq t} \mathcal{C}_s| / |\mathcal{C}_t| \]
+            \[\mathbb{P}(\forall t,\, \theta^* \in \mathcal{C}_t) \geq 1 - \alpha
+    \] 
+    } %  Interval notation, 
+            
+            \only<3>{\[\mathbb{E}_{x_{t+1}} \left[ R_{t+1}(\theta^*) \,\middle|\, x_1, \ldots, x_t \right] = R_t(\theta^*)
+            \]
+            \begin{displaymath}
+                \mathbb{P}(\exists t : R_t(\theta^*) \geq 1/\alpha) \leq \alpha
+            \end{displaymath}
+
+            \[\mathcal{C}_t := \{\theta : R_t(\theta) \leq 1/\alpha \} \] } % Confidence set definition
+            
+            \only<4>{Idea is to create a sequence of martingales for each exit layer and then
+    use Ville's theorem to construct AVCS. \\
+    \[ R_t^*(y) = \prod_{l=1}^{t} \frac{p_l(y| x^*, \mathcal{D})}
+        {p(y| x^*, W_l)} , W_l \sim p(W_l | D^* )\]}
+            
+            \only<5>{\begin{gather*} % posterior and predictive dsitribution
+                y \sim \mathcal{N}\left(y; h_t(x)^T W_t, \sigma_t^2\right), \\
+                W_t \sim \mathcal{N}(W_t; \hat{W}_t, \sigma_{w,t}^2 \mathbb{I}_H) \\
+                p(W_t | \mathcal{D}) = \mathcal{N}(W_t; \mu_t, \Sigma_t), \quad \\ 
+                p_t(y | x^*, \mathcal{D}) = \mathcal{N}(y; h_t(x^*)^T \mu_t, v_* + \sigma_t^2)
+            \end{gather*} 
+            }
+            
+            \only<6>{\begin{gather*} % posterior and predictive dsitribution classification
+                p(y | \pi_t) = \text{Cat}(y | \pi_t), \\
+                p(\pi_t | x^*, \mathcal{D}) = \text{Dir}(\pi_t | \alpha_t(x^*; \mathcal{D})) \\ 
+                p_t(y = y | x^*, \mathcal{D}) = \int p(y = y | \pi_t) \, p(\pi_t | x^*, \mathcal{D}) \, d\pi_t  \\
+                = \frac{\alpha_{t,y}}{\sum_{y' \in \mathcal{Y}} \alpha_{t,y'}}
+            \end{gather*} 
+            }
+
+            \only<7>{\[ a_t(x) = \text{ReLU}(x, \tau_t) \]}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+\begin{frame}{Evaluations}
+    \begin{columns} % T aliign top
+        \column{0.5\textwidth}
+        \begin{gather*}
+            \mathcal{C}_t = (l_t, r_t) \subseteq \mathbb{R} \\
+            \mathcal{L}(W_{1:T}, U_{1:T}; \mathcal{D}) =  \\
+            \sum_{n=1}^{N} \frac{1}{T} \sum_{t=1}^{T} \ell(y_n, f(x_n; W_t, U_{1:t})) \\
+            \text{size}(t) := \frac{1}{n_{\text{test}}} \sum_{n=1}^{n_{\text{test}}} |\mathcal{C}_t(x_n)| \\ 
+            \text{coverage}(t) := \frac{1}{n_{\text{test}}} \sum_{n=1}^{n_{\text{test}}} \left[ y_n \in \mathcal{C}_t(x_n) \right] \\
+            \mathcal{N}(t) = |\bigcap_{s \leq t} \mathcal{C}_s| / |\mathcal{C}_t| \\
+            \mathbb{P}(\forall t,\, \theta^* \in \mathcal{C}_t) \geq 1 - \alpha 
+        \end{gather*}
+        
+        \column{0.5\textwidth}
+        \includegraphics<1>[width=0.6\textwidth]{figs/fig_2.png}
+        \includegraphics<2>[width=\textwidth]{figs/fig_1.png}
+        \includegraphics<3>[width=\textwidth]{figs/fig_3.png}
+        
+    \end{columns}
+\end{frame}
+
 \begin{frame}{Proposal}
     \begin{itemize}
         \item Improving confidence margins in student model makes for more efficient knowledge transfer with DEDIER approach.
@@ -382,5 +393,6 @@
 \end{frame}
 
 %----------------------------------------------------------------------------------------
+
 
 \end{document}

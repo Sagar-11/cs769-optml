@@ -1,0 +1,23 @@
+\begin{thebibliography}{}
+
+\bibitem[Hinton et~al., 2015]{hinton_distilling_2015}
+Hinton, G., Vinyals, O., and Dean, J. (2015).
+\newblock Distilling the {Knowledge} in a {Neural} {Network}.
+\newblock arXiv:1503.02531 [cs, stat].
+
+\bibitem[Jazbec et~al., 2024]{jazbec_early-exit_2024}
+Jazbec, M., Forré, P., Mandt, S., Zhang, D., and Nalisnick, E. (2024).
+\newblock Early-{Exit} {Neural} {Networks} with {Nested} {Prediction} {Sets}.
+\newblock arXiv:2311.05931 [cs, stat].
+
+\bibitem[Meronen et~al., 2023]{meronen_fixing_2023}
+Meronen, L., Trapp, M., Pilzer, A., Yang, L., and Solin, A. (2023).
+\newblock Fixing {Overconfidence} in {Dynamic} {Neural} {Networks}.
+\newblock Version Number: 4.
+
+\bibitem[Tiwari et~al., 2024]{tiwari_using_2024}
+Tiwari, R., Sivasubramanian, D., Mekala, A., Ramakrishnan, G., and Shenoy, P. (2024).
+\newblock Using {Early} {Readouts} to {Mediate} {Featural} {Bias} in {Distillation}.
+\newblock In {\em 2024 {IEEE}/{CVF} {Winter} {Conference} on {Applications} of {Computer} {Vision} ({WACV})}, pages 2626--2635, Waikoloa, HI, USA. IEEE.
+
+\end{thebibliography}
