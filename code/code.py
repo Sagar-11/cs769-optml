@@ -9,9 +9,18 @@
 # -------------------------------------------------------------
 
 # 0. Imports
+import os
+from dotenv import load_dotenv
+load_dotenv()
+os.environ["WANDB_DISABLED"] = "true"  # Disable Weights & Biases in Kaggle
+# Improve CUDA memory fragmentation handling
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+# Allow both GPUs: teacher→cuda:0, student→cuda:1
+# Load Hugging Face token from .env
+HF_TOKEN = os.getenv("HF_TOKEN")
 import torch, evaluate, numpy as np, pandas as pd
 from torch import nn
-from datasets import load_dataset
+from datasets import load_dataset, ClassLabel
 from transformers import (
     AutoTokenizer,
     GPT2ForSequenceClassification,
@@ -43,8 +52,10 @@ R = 1   # fine‑tune the auxiliary head for R epochs
 # 1. Dataset & Tokeniser
 # ------------------------------------------------------------------
 print("Loading Civil Comments dataset and preparing tokenizer…")
-tok = AutoTokenizer.from_pretrained("gpt2-large")
+tok = AutoTokenizer.from_pretrained("gpt2-large", token=HF_TOKEN)
 tok.pad_token, tok.padding_side = tok.eos_token, "right"
+# Ensure our models know the pad token
+PAD_TOKEN_ID = tok.pad_token_id
 
 splits = load_dataset("civil_comments")      # returns train/validation/test
 
@@ -52,52 +63,36 @@ def tokenize(ex):
     return tok(
         ex["text"],
         truncation=True,
-        max_length=256,
+        max_length=128,
         padding="max_length",
     )
 
 splits_tok = splits.map(tokenize, batched=True).rename_column("toxicity", "labels")
+
+# ── Convert continuous toxicity → binary class labels ────────────────
+def binarize_labels(batch):
+    # threshold at 0.5: 0 = non‑toxic, 1 = toxic
+    batch["labels"] = [int(x >= 0.5) for x in batch["labels"]]
+    return batch
+
+splits_tok = splits_tok.map(binarize_labels, batched=True)
+# Ensure labels are 0/1 integers for CrossEntropyLoss
+splits_tok = splits_tok.cast_column("labels", ClassLabel(num_classes=2))
+
+# ─────────────────────────────────────────────────────────────────────
+
 # add per‑example weights (all 1.0 to start)
 splits_tok["train"] = splits_tok["train"].add_column("wt", [1.0] * len(splits_tok["train"]))
 
-print(f"Tokenization complete. "
-      f"Train {len(splits_tok['train']):,} / "
-      f"Val {len(splits_tok['validation']):,} / "
-      f"Test {len(splits_tok['test']):,}")
-
-# ------------------------------------------------------------------
-# 2. Teacher: GPT‑2‑large fine‑tune
-# ------------------------------------------------------------------
-teacher = GPT2ForSequenceClassification.from_pretrained(
-    "gpt2-large", num_labels=2, output_hidden_states=True
-).to(TEACHER_DEV)
-
-args_teacher = TrainingArguments(
-    output_dir="gpt2_teacher",
-    per_device_train_batch_size=2,
-    gradient_accumulation_steps=4,   # effective 8
-    fp16=True, learning_rate=5e-6,
-    num_train_epochs=3,
-    weight_decay=0.01,
-)
-trainer_teacher = Trainer(
-    model=teacher,
-    args=args_teacher,
-    train_dataset=splits_tok["train"],
-    eval_dataset=splits_tok["validation"],
-)
-print(f"Starting teacher fine‑tuning on {TEACHER_DEV}…")
-trainer_teacher.train()
-teacher.eval()
-teacher.save_pretrained("gpt2_teacher_ckpt")
-print("Teacher fine‑tuning finished.")
 
 # ------------------------------------------------------------------
 # 3. Baseline student (DistilGPT‑2) – plain fine‑tune
 # ------------------------------------------------------------------
 baseline_student = GPT2ForSequenceClassification.from_pretrained(
-    "distilgpt2", num_labels=2, output_hidden_states=True
+    "distilgpt2", num_labels=2, output_hidden_states=True, token=HF_TOKEN
 ).to(STUDENT_DEV)
+baseline_student.config.pad_token_id = PAD_TOKEN_ID
+baseline_student.config.use_cache = False
 
 args_base = TrainingArguments(
     output_dir="distilgpt2_baseline",
@@ -122,8 +117,10 @@ print("Baseline student fine‑tuning finished.")
 # 4. Raw (un‑trained) student for 0‑shot comparison
 # ------------------------------------------------------------------
 raw_student = GPT2ForSequenceClassification.from_pretrained(
-    "distilgpt2", num_labels=2, output_hidden_states=True
+    "distilgpt2", num_labels=2, output_hidden_states=True, token=HF_TOKEN
 ).to(STUDENT_DEV)
+raw_student.config.pad_token_id = PAD_TOKEN_ID
+raw_student.config.use_cache = False
 raw_student.eval()
 
 # ------------------------------------------------------------------
@@ -134,9 +131,12 @@ class DEDIERCausalStudent(nn.Module):
     def __init__(self, base_ckpt="distilgpt2", num_labels=2, aux_layer=1):
         super().__init__()
         cfg = AutoConfig.from_pretrained(base_ckpt, output_hidden_states=True)
-        self.backbone = AutoModelForCausalLM.from_pretrained(
-            base_ckpt, config=cfg
-        ).transformer
+        model_lm = AutoModelForCausalLM.from_pretrained(
+            base_ckpt, config=cfg, token=HF_TOKEN
+        )
+        model_lm.config.pad_token_id = model_lm.config.eos_token_id
+        model_lm.config.use_cache = False
+        self.backbone = model_lm.transformer
         self.cls_head = nn.Linear(cfg.n_embd, num_labels)
         self.aux_layer = aux_layer
         self.aux_head = nn.Sequential(
