@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex /Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides"] 1744274584.90678 "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.aux" "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.bbl" "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides" 1744274939.53262 0
+["bibtex /Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides"] 1744283871.41801 "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.aux" "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.bbl" "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides" 1744283876.61501 0
   "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/optML.bib" 1744273238.326 11458 1c809ab682f9e115a94dd8aad9fd1b94 ""
-  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.aux" 1744274939.02862 7045 56601995d6acfb2f879f29b2166a634e "pdflatex"
+  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.aux" 1744283876.12828 7046 35c74c54b12f10d48f606045ed09f2b5 "pdflatex"
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/base/apalike.bst" 1292289607 24635 604dafcc79f521a11ea73e506e1fbd98 ""
   (generated)
   "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.bbl"
   "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.blg"
   (rewritten before read)
-["pdflatex"] 1744274934.40571 "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.tex" "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.pdf" "slides" 1744274939.53288 0
+["pdflatex"] 1744283871.62181 "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.tex" "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.pdf" "slides" 1744283876.61524 0
   "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/beamercolorthemeSimpleDarkBlue.sty" 1744273238.3096 1519 0fb483013d61269173c77458b49f793b ""
   "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/beamerfontthemeSimpleDarkBlue.sty" 1744273238.30972 1415 7f3c6b511b7db0d7ad2ec03af90863b5 ""
   "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/beamerinnerthemeSimpleDarkBlue.sty" 1744273238.30987 2672 8171141ce1a43fc7adccf194f45390e6 ""
@@ -28,12 +28,12 @@
   "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/figs/fig_7.png" 1744273238.32478 87863 aa5d5005f1e66862ae2cd81ee9406546 ""
   "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/figs/fig_8.png" 1744273238.32554 223656 fdf293d05139cc6aa353885d2e669c68 ""
   "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/figs/fig_9.png" 1744273883.4156 186534 9736e313b958a6b3d3235cd262702f7b ""
-  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.aux" 1744274939.02862 7045 56601995d6acfb2f879f29b2166a634e "pdflatex"
-  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.bbl" 1744274585.07514 1087 a2b9e8d1436b85c6556f3826f8aa860b "bibtex /Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides"
-  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.nav" 1744274939.03048 3018 5cbf42bbeeb2e02396296831b5d49b14 "pdflatex"
-  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.out" 1744274939.03017 846 8869a992e995b927e6e3637f2eefef36 "pdflatex"
-  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.tex" 1744274934.10851 16855 c1238e437cebf416a17e2f9c4ca25e5d ""
-  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.toc" 1744274939.03053 273 07c116c125115f03e3f92c1edfaf67b6 "pdflatex"
+  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.aux" 1744283876.12828 7046 35c74c54b12f10d48f606045ed09f2b5 "pdflatex"
+  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.bbl" 1744283871.61355 1087 a2b9e8d1436b85c6556f3826f8aa860b "bibtex /Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides"
+  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.nav" 1744283876.1302 3018 5cbf42bbeeb2e02396296831b5d49b14 "pdflatex"
+  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.out" 1744283876.12987 846 8869a992e995b927e6e3637f2eefef36 "pdflatex"
+  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.tex" 1744283865.83432 16743 b134779590dc5139fc4955c0bb6917c0 ""
+  "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/slides.toc" 1744283876.13024 273 07c116c125115f03e3f92c1edfaf67b6 "pdflatex"
   "/Users/edvinfasth/Desktop/iitb/cs769/sagars git/försök 2/cs769-optml/test.pdf" 1744273238.32652 22054 161d239ba8a3172443f1f15344169e8a ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
