@@ -1,2 +1,4 @@
 data/
 .env
+seminar_comms.*
+Outputs/seminar_comms.*

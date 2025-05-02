@@ -27,8 +27,7 @@
           Ideal Scenario: We compute the Posterior for the given test point,label(caveat thats the one we are making predictions for)
           Proposition 1: This predictive likelihood ratio is martingale. Realisable relaxation: Instead of taking \(W_t|D_* \)  from posterior of dataset 
           after adding a new point, we take it to be same as prior i.e \(W_t|D \)  The miscoverage probabibliity can be bounded by some exponential term with KL of distribution, and new instance
-          
-          For regression: 
+          For regression: closed form of the posterior
     \item
           \cite{hinton_distilling_2015} Having acces to a large model that generalises well, the genrelisation can be
           induced to a smaller model by distillation. Here in combination with the cross entropy loss we also minimise the
@@ -38,8 +37,18 @@
 \end{itemize}
 
 
-
+\section{Experiment Setup:}
+Fork from feature bias paper:
+Structure: Download data in directory defined in data/data.py, main experiment defined in run_exp 
+Data directory has some pytorch dataset definitions defined. models
  
+
+dump
+% Knowledge distillation, or to use a bigger machine learning model in order to train a smaller one, has several potential upsides.  The most obvious use case is that a smaller model requires less computation, and if most of the quality can be transferred to a smaller model, that might be good enough for the desired purpose. However, as neural networks become increasingly complex, there is a risk that they may begin to capture intricate sub-patterns that degrade rather than enhance performance. Introducing a distilled, simplified version of the model can therefore not only approximate the performance of the original but, in some cases, even surpass it.
+
+% \subsubsection{Knowledge Distillation}
+% In their seminal work, Hinton et al. introduced the concept of knowledge distillation as a method for transferring knowledge from a large, complex model (the “teacher”) to a smaller, more efficient model (the “student”) \cite{hinton2015distilling}. The core idea is that instead of training the student model solely on hard labels, it is trained to match the soft output probabilities (often called “soft targets”) produced by the teacher. These soft targets encode rich information about the relative probabilities of incorrect classes, reflecting the teacher’s learned generalizations and inter-class similarities. By learning from these more informative targets, the student model can generalize better than if it were trained on hard labels alone. This approach enables the student to replicate much of the teacher’s performance while being significantly smaller and faster to deploy.
+
 
 \bibliographystyle{acm}
 \bibliography{optML.bib}
