@@ -111,7 +111,7 @@ via Laplace Approximation of Early Exits}
 
 \begin{frame}{Recap from Seminar}
     \begin{itemize}
-        \item<1-> Bayesian treatment of parameters
+        \item<1-> 
         \[
         p(\boldsymbol{\theta} \mid \mathcal{D}_{\text{train}})
         = \frac{p(\mathcal{D}_{\text{train}} \mid \boldsymbol{\theta}) \, p(\boldsymbol{\theta})}{\int_{\boldsymbol{\theta}} p(\mathcal{D}_{\text{train}}, \boldsymbol{\theta}) \, d\boldsymbol{\theta}}
@@ -127,7 +127,8 @@ via Laplace Approximation of Early Exits}
         \]
         \[
             \mathbf{V}^{-1} \otimes \mathbf{U}^{-1} = \mathbf{H}^{-1}
-        \]
+        \] where $H$ is 
+        \[ \mathbf{H} := - \nabla_{\boldsymbol{\theta}}^2 \log p(\boldsymbol{\theta} | \mathcal{D}) \Big|_{\boldsymbol{\theta}_{\text{MAP}}} \]
         \item<4-> Samples
         \[
          \hat{\mathbf{z}}_i^{(l)} = \hat{\mathbf{W}}_{\text{MAP}}^\top \hat{\boldsymbol{\phi}}_i + (\hat{\boldsymbol{\phi}}_i^\top \mathbf{V} \hat{\boldsymbol{\phi}}_i)^{\frac{1}{2}} (\mathbf{L} \mathbf{g}^{(l)})
@@ -144,7 +145,7 @@ via Laplace Approximation of Early Exits}
         \begin{itemize}
             \item The MultiNLI dataset \cite{williams2018broad} was used.
             \item Determine if premise entails, contradicts, or is neutral given a hypothesis.
-            \item Major Diffrences with DEDIER: The auxiliary reweighting is done in every layer, as student trained for five epochs.
+            \item Major Diffrences with DEDIER: The auxiliary reweighting is done in every epoch, as student trained for five epochs.
             \item The auxiliary network used is a simple, single layer network.
             \item Models Used
             \begin{itemize}
